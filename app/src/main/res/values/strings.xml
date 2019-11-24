@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Countries</string>
+    <string name="search">Search</string>
+    <string name="africa">Africa</string>
+    <string name="america">America</string>
+    <string name="asia">Asia</string>
+    <string name="europa">Europa</string>
+    <string name="oceania">Oceania</string>
+</resources>

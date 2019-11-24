@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_m"
+            android:layout_marginTop="@dimen/margin_xs"
+            android:layout_marginEnd="@dimen/margin_m"
+            android:layout_marginBottom="@dimen/margin_s"
+            app:cardCornerRadius="4dp">
+
+            <SearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            style="@style/TabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="scrollable">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_africa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/africa" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_america"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/america" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_asia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/asia" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_europa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/europa" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_oceania"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/oceania" />
+        </com.google.android.material.tabs.TabLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey_light"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/item_country_list" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>
