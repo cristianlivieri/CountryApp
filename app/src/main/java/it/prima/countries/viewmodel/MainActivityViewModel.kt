@@ -1,6 +1,6 @@
 package it.prima.countries.viewmodel
 
-import android.content.Context
+import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -9,17 +9,19 @@ import it.prima.countries.utils.Constants
 import it.prima.countries.utils.NetworkUtils
 import it.prima.countries.view.MainActivityView
 
-class MainActivityViewModel {
+class MainActivityViewModel : ViewModel() {
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
     private var view: MainActivityView? = null
+    var tabSelected = 0
 
-    private fun createRetrofit(context: Context): ApiService {
-        val retrofit = NetworkUtils.createRetrofit(Constants.BASE_URL, context)
+    private fun createRetrofit(): ApiService {
+        val retrofit = NetworkUtils.createRetrofit(Constants.BASE_URL)
         return retrofit.create(ApiService::class.java)
     }
 
-    fun loadCountries(region: String, context: Context) {
-        compositeDisposable.add(createRetrofit(context).getAll()
+    fun loadCountries(region: String) {
+        view!!.showProgress(true)
+        compositeDisposable.add(createRetrofit().getAll()
             .subscribeOn(Schedulers.io())
             .flatMapIterable { v -> v }
             .filter { countries -> countries.region == region }
@@ -27,7 +29,11 @@ class MainActivityViewModel {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 view!!.load(response)
-            }, { t -> view!!.error(t) })
+                view!!.showProgress(false)
+            }, { t ->
+                view!!.error(t)
+                view!!.showProgress(false)
+            })
         )
     }
 

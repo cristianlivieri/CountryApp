@@ -6,4 +6,14 @@
     <string name="asia">Asia</string>
     <string name="europa">Europa</string>
     <string name="oceania">Oceania</string>
+
+    <string name="capital">Capital:</string>
+    <string name="region">Country in</string>
+    <string name="demonym">Name of the population:</string>
+    <string name="area">Area:</string>
+    <string name="population">Population:</string>
+    <string name="currencies">Currencies:</string>
+    <string name="languages">Languages</string>
+    <string name="connection_error">Connection error.</string>
+    <string name="search_by_languages">Search by languages</string>
 </resources>

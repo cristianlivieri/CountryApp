@@ -11,6 +11,8 @@
     <color name="grey">#7E8890</color>
     <color name="grey_Dark">#4D5969</color>
 
+    <color name="line">#AEB8C0</color>
+
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
 </resources>

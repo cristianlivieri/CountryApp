@@ -3,6 +3,7 @@ package it.prima.countries.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import it.prima.countries.CountriesApplication
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -11,7 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkUtils {
 
-    private fun hasNetwork(context: Context): Boolean? {
+    private val context = CountriesApplication.appContext!!
+
+    fun hasNetwork(): Boolean? {
         var isConnected: Boolean? = false // Initial Value
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -21,7 +24,7 @@ object NetworkUtils {
         return isConnected
     }
 
-    private fun setClient(context: Context): OkHttpClient {
+    private fun setClient(): OkHttpClient {
         // Specifies a cache of 5MB.
         val size = (5 * 1024 * 1024).toLong()
 
@@ -31,7 +34,7 @@ object NetworkUtils {
             .cache(cache)
             .addInterceptor { chain ->
                 var request = chain.request()
-                request = if (hasNetwork(context)!!) {
+                request = if (hasNetwork()!!) {
                     // If there is Internet, get the cache that was stored 5 seconds ago.
                     request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build()
                 } else {
@@ -46,12 +49,12 @@ object NetworkUtils {
             .build()
     }
 
-    fun createRetrofit(url: String, context: Context): Retrofit {
+    fun createRetrofit(url: String): Retrofit {
         return Retrofit.Builder()
             .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(setClient(context))
+            .client(setClient())
             .build()
     }
 }

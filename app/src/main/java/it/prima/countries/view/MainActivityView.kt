@@ -6,7 +6,10 @@ interface MainActivityView {
 
     fun load(countriesList: MutableList<Country>)
 
+    fun showProgress(show: Boolean)
+
     fun error(e: Throwable)
 
     fun error()
+
 }
